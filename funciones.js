@@ -1,4 +1,7 @@
 
+
+
+
 const elegirMenu = () => {
     do {
         let numero = prompt("Seleccione el tipos de pizza: 1- Vegetariana 2- No vegetariana");
@@ -27,9 +30,6 @@ const elegirMenu = () => {
     
 }
 
-const mostrarPedido = () =>{
-    
-}
 
 
 const agregarIngredienteVegetariano = () => {
@@ -37,23 +37,23 @@ const agregarIngredienteVegetariano = () => {
             1.-Pimenton
             2.-Carne soya `))
 
-            if (ingrediente === 1){
+            if (ingrediente == "pimientos"){
                 alert("Pimientos agregados")
-                } else if(ingrediente === 2) {2
+                } else if(ingrediente === "Soya") {
                 alert("Soya agregado")        
                 }
                 switch (ingrediente){
-                case 1 : 
-                mensaje = " Su pedido es pizza vegetariana con queso mozzarella, tomate y pimenton"
+                case "pimientos" : 
+                precio = 400;
                 break;
-                case 2:  
-                mensaje = "Su pedido es pizza vegetariana con queso mozzarella, tomate y carne soya"
+                case "soya":  
+                mensaje = "soya"
+                precio = 500
                 break;
                 default: 
                 mensaje = "El ingrediente seleccionado no esta en el menú, Por favor seleccione un ingrediente valido"
                 break;
                 }       
-                alert(mensaje + " Muchas gracias por su pedido")
 }
 
 
@@ -100,3 +100,22 @@ const InicarConsulta = () => {
 
 alert("Hola a Don Roka napoli");
 InicarConsulta();
+
+
+let pizzas = prompt("agregar un tipo de pizza vegetariana o normal");
+        
+        if (pizzas === "vegetariana" || pizzas == "normal"){
+            
+            switch (pizzas){
+            case "vegetariana" :         
+            precio : 2500;
+            break;
+            case "normal": 
+            precio: 2600; 
+            break;
+            default: 
+            mensaje = "El ingrediente seleccionado no esta en el menú, Por favor seleccione un ingrediente valido"
+            break;
+            }       
+        console.log(carritoPizza);   
+    }
