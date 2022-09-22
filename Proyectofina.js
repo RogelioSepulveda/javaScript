@@ -11,6 +11,12 @@ let pizzas = [
     }
 ]
 
+let contenedor = document.createElement("div")
+
+
+
+
+
 class Carro {
     constructor(pizza, ingrediente, precio, cantidad){
         this.pizza = pizza;
@@ -66,6 +72,7 @@ const buscarPedido = () => {
     total = total + carritoPizza.precio * carritoPizza.cantidad
     cuenta.push(`Pizza: ${carritoPizza.pizza} con ${carritoPizza.ingrediente} x ${carritoPizza.cantidad} = ${carritoPizza.precio * carritoPizza.cantidad}`)
     alert(`Cuenta: ${cuenta.join("\n")} \nTotal ${total}`) 
+    contenedor.innerHTML = ` <h3> ${cuenta.pizza} </h3>`
     });
 }        
 
