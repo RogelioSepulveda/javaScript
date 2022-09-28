@@ -71,6 +71,7 @@ const DOMitems = document.querySelector('#items');
 const DOMcarrito = document.querySelector('#carrito');
 const DOMtotal = document.querySelector('#total');
 const DOMbotonVaciar = document.querySelector('#boton-vaciar');
+const miLocalStorage = window.localStorage;
 
 
 const estructuraCarrito = () => {
@@ -118,6 +119,7 @@ const estructuraCarrito = () => {
 const cantidadPizza = (evento) => {
     carrito.push(evento.target.getAttribute('marcador'))
     carritoPizza();
+    guardarCarritoEnLocalStorage();
 }
 
 const calcularTotal = () => {    
@@ -170,15 +172,30 @@ const borrarPizza = (evento) => {
         return carritoId !== id;
     });
     carritoPizza();
+    guardarCarritoEnLocalStorage();
 }
+
+function guardarCarritoEnLocalStorage () {
+    miLocalStorage.setItem('carrito', JSON.stringify(carrito));
+}
+
+function cargarCarritoDeLocalStorage () {
+    localStorage.getItem("carrito") == null ? localStorage.setItem("carrito", JSON.stringify(carrito)) : carrito = JSON.parse(localStorage.getItem("carrito"))
+}
+
 
 /* realizar compra y vaciar el carro */
 
-// const vaciarCarrito = () =>{
-//     carrito = [];
-//     carritoPizza();
-// }
+const vaciarCarrito = () =>{
+    carrito = [];
+    carritoPizza();
+    localStorage.clear();
+}
 
+DOMbotonVaciar.addEventListener('click', vaciarCarrito);
+
+
+cargarCarritoDeLocalStorage();
 estructuraCarrito();
 carritoPizza();
 
