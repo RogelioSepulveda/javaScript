@@ -1,4 +1,3 @@
-
 const baseDeDatos = [
     {
         id: 1,
@@ -66,7 +65,7 @@ const baseDeDatos = [
 
 ];
 
-let carrito = [];
+let carrito = JSON.parse (localStorage.getItem("carrito")) || [];
 const DOMitems = document.querySelector('#items');
 const DOMcarrito = document.querySelector('#carrito');
 const DOMtotal = document.querySelector('#total');
@@ -97,7 +96,7 @@ const estructuraCarrito = () => {
 
         const nPrecio = document.createElement('h5');
         nPrecio.classList.add('card-text'); 
-        nPrecio.textContent = `${info.precio}`;
+        nPrecio.textContent = `$ ${new Intl.NumberFormat('es-CL').format(info.precio)}`;
 
         const nBoton = document.createElement('button');
         nBoton.classList.add('btn', 'btn-success');
@@ -150,7 +149,7 @@ const carritoPizza = () => {
 
         const miNodo = document.createElement('li');
         miNodo.classList.add('list-group-item', 'text-right', 'mx-5', 'bold');
-        miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - $ ${miItem[0].precio}`;
+        miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - $ ${new Intl.NumberFormat('es-CL').format(miItem[0].precio)}`;
         
 
         const miBoton = document.createElement('button');
@@ -180,11 +179,8 @@ function guardarCarritoEnLocalStorage () {
 }
 
 function cargarCarritoDeLocalStorage () {
-    localStorage.getItem("carrito") == null ? localStorage.setItem("carrito", JSON.stringify(carrito)) : carrito = JSON.parse(localStorage.getItem("carrito"))
+    localStorage.getItem("carrito") == null ? localStorage.setItem("carrito", JSON.stringify(carrito)) : carrito = JSON.parse(localStorage.getItem("carrito"))  
 }
-
-
-/* realizar compra y vaciar el carro */
 
 const vaciarCarrito = () =>{
     carrito = [];
@@ -195,7 +191,6 @@ const vaciarCarrito = () =>{
 DOMbotonVaciar.addEventListener('click', vaciarCarrito);
 
 
-cargarCarritoDeLocalStorage();
 estructuraCarrito();
 carritoPizza();
 
