@@ -103,6 +103,9 @@ const estructuraCarrito = () => {
         nBoton.textContent = 'Agregar cantidad';
         nBoton.setAttribute('marcador', info.id);
         nBoton.addEventListener('click', cantidadPizza);
+        
+        
+
 
         miNodoCardBody.appendChild(nImagen);
         miNodoCardBody.appendChild(nTitulo);
@@ -117,6 +120,12 @@ const estructuraCarrito = () => {
 
 const cantidadPizza = (evento) => {
     carrito.push(evento.target.getAttribute('marcador'))
+    carritoPizza();
+    guardarCarritoEnLocalStorage();
+}
+
+const quitarPizza = (evento) => {
+    carrito.pop(evento.target.getAttribute('marcador'))
     carritoPizza();
     guardarCarritoEnLocalStorage();
 }
@@ -157,12 +166,13 @@ const carritoPizza = () => {
         miBoton.textContent = 'Eliminar';
         miBoton.dataset.item = item;
         miBoton.addEventListener('click', borrarPizza);
-
+        
         miNodo.appendChild(miBoton);
         DOMcarrito.appendChild(miNodo);  
     });
     DOMtotal.textContent = calcularTotal();
 }
+
 
 const borrarPizza = (evento) => {
     
@@ -173,6 +183,8 @@ const borrarPizza = (evento) => {
     carritoPizza();
     guardarCarritoEnLocalStorage();
 }
+
+
 
 function guardarCarritoEnLocalStorage () {
     miLocalStorage.setItem('carrito', JSON.stringify(carrito));
@@ -188,7 +200,29 @@ const vaciarCarrito = () =>{
     localStorage.clear();
 }
 
-DOMbotonVaciar.addEventListener('click', vaciarCarrito);
+
+
+DOMbotonVaciar.addEventListener("click", () => {
+    Swal.fire({
+        title: 'Seguro que desea eliminar su pedido?',
+        text: "Seleccione una opción",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Confirmar'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire(
+            vaciarCarrito(),
+            'Su carro de compra esta vacio',
+            'Your file has been deleted.',
+            'success'
+        )
+    }
+    })   
+})
 
 
 estructuraCarrito();
